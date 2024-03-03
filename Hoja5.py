@@ -53,3 +53,14 @@ def simular(env, cpu):
         lista_carros.append(newCar)
         env.process(newCar.run())
         yield env.timeout(1) # tiempo de creación entre procesos
+
+lista_carros = []
+env = simpy.Environment()
+cpu = simpy.Resource(env, capacity=1)  # Define the race cpu as a shared resource
+print("Llamada a simular")
+env.process(simular(env, cpu))
+
+env.run()
+
+for c in lista_carros:
+    print(f"{c.principio} -- {c.fin}")

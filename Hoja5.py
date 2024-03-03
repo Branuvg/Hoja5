@@ -42,3 +42,14 @@ class Process:
                 print(f"{env.now} P {self.name} termina de poner memoria.")
         print(f"{env.now} [Terminated] P {self.name} ha terminado sus procesos")
         self.fin = env.now
+
+def simular(env, cpu):
+    # creamos procesos
+    for i in range(100):
+        name = f"Proceso_{i}"
+        newCar = Process(name, env, cpu,
+                     np.random.randint(1, 10),
+                     np.random.randint(1, 10))
+        lista_carros.append(newCar)
+        env.process(newCar.run())
+        yield env.timeout(1) # tiempo de creación entre procesos

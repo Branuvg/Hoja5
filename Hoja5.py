@@ -55,7 +55,7 @@ def simular(env, cpu):
 tiempos_cpu = []
 lista_ejecuciones = []
 env = simpy.Environment()
-cpu = simpy.Resource(env, capacity=1)  # Define the race cpu as a shared resource
+cpu = simpy.Resource(env, capacity=1)  # Define el cpu as a shared resource
 print("Llamada a simular")
 env.process(simular(env, cpu))
 
@@ -73,7 +73,7 @@ print("Desviación estándar de tiempo en CPU:", desviacion_std)
 
 # Graficar
 num_procesos = list(range(1, len(tiempos_cpu) + 1))
-plt.plot(num_procesos, tiempos_cpu)
+plt.plot(tiempos_cpu, num_procesos)
 plt.xlabel('Número de procesos')
 plt.ylabel('Tiempo promedio en CPU')
 plt.title('Tiempo promedio en CPU por número de procesos')

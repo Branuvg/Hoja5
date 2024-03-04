@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 np.random.seed(10)
 cant = 200
+intervalo = 1/10
 
 class Process:
     def __init__(self, name, env, cpu, memoria, instrucciones):
@@ -47,7 +48,7 @@ def simular(env, cpu):
     # creamos procesos
     for i in range(cant):
         name = f"Proceso_{i}"
-        newprocesos = Process(name, env, cpu, np.random.randint(1,10), np.random.randint(1,10))
+        newprocesos = Process(name, env, cpu, random.expovariate(intervalo), random.expovariate(intervalo))
         lista_ejecuciones.append(newprocesos)
         env.process(newprocesos.run())
         yield env.timeout(1) # tiempo de creación entre procesos
@@ -74,7 +75,7 @@ print("Desviación estándar de tiempo en CPU:", desviacion_std)
 # Graficar
 num_procesos = list(range(1, len(tiempos_cpu) + 1))
 plt.plot(tiempos_cpu, num_procesos)
-plt.xlabel('Número de procesos')
-plt.ylabel('Tiempo promedio en CPU')
+plt.ylabel('Número de procesos')
+plt.xlabel('Tiempo promedio en CPU')
 plt.title('Tiempo promedio en CPU por número de procesos')
 plt.show()
